@@ -1,82 +1,73 @@
 @import "tailwindcss";
 
 @theme {
-  /* Game-inspired Colors */
+  /* Color palette - references CSS custom properties for theme switching */
   --color-bg-primary: var(--theme-bg-primary);
   --color-bg-card: var(--theme-bg-card);
-  --color-bg-tag: var(--theme-bg-tag);
-  --color-bg-social: var(--theme-bg-social);
+  --color-bg-muted: var(--theme-bg-muted);
   --color-text-primary: var(--theme-text-primary);
   --color-text-secondary: var(--theme-text-secondary);
-  --color-text-dark: var(--theme-text-dark);
   --color-accent: var(--theme-accent);
   --color-border: var(--theme-border);
 
-  /* Game-specific colors */
-  --color-xp-green: var(--theme-xp-green);
-  --color-health-red: var(--theme-health-red);
-  --color-mana-blue: var(--theme-mana-blue);
-  --color-gold: var(--theme-gold);
-  --color-pixel-shadow: var(--theme-pixel-shadow);
-
   /* Font Families */
-  --font-display: var(--font-press-start), monospace;
-  --font-body: var(--font-vt323), monospace;
+  --font-body: "Inter", "Geist", system-ui, sans-serif;
+  --font-display: "Inter", "Geist", system-ui, sans-serif;
 
-  /* Border Radius - pixelated = no radius */
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  --radius-full: 0px;
+  /* Type Scale - 4 body sizes + 2 heading sizes */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 1.875rem;
+
+  /* Spacing Scale - 4px base */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Border Radius - professional rounded corners */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
 }
 
-/* Dark theme (default) - dungeon/night mode */
+/* Dark theme (default) */
 :root,
 [data-theme="dark"] {
-  --theme-bg-primary: #1a0a2e;
-  --theme-bg-card: #2d1b4e;
-  --theme-bg-tag: #0d0d0d;
-  --theme-bg-social: #3d2b5e;
-  --theme-text-primary: #e8e8e8;
-  --theme-text-secondary: #a89cc8;
-  --theme-text-dark: #1a0a2e;
-  --theme-accent: #ffcc00;
-  --theme-border: #6b4d8a;
-  --theme-xp-green: #4ade80;
-  --theme-health-red: #ef4444;
-  --theme-mana-blue: #60a5fa;
-  --theme-gold: #ffcc00;
-  --theme-pixel-shadow: #0a0a1a;
+  --theme-bg-primary: #0f172a;
+  --theme-bg-card: #1e293b;
+  --theme-bg-muted: #334155;
+  --theme-text-primary: #f8fafc;
+  --theme-text-secondary: #94a3b8;
+  --theme-accent: #60a5fa;
+  --theme-border: #334155;
 }
 
-/* Light theme - overworld/day mode */
+/* Light theme */
 [data-theme="light"] {
-  --theme-bg-primary: #87ceeb;
-  --theme-bg-card: #8fbc8f;
-  --theme-bg-tag: #5a8a5a;
-  --theme-bg-social: #6db36d;
-  --theme-text-primary: #1a1a1a;
-  --theme-text-secondary: #2d4a2d;
-  --theme-text-dark: #ffffff;
-  --theme-accent: #ff6b00;
-  --theme-border: #4a7a4a;
-  --theme-xp-green: #22c55e;
-  --theme-health-red: #dc2626;
-  --theme-mana-blue: #3b82f6;
-  --theme-gold: #f59e0b;
-  --theme-pixel-shadow: #2d5a2d;
+  --theme-bg-primary: #ffffff;
+  --theme-bg-card: #f8fafc;
+  --theme-bg-muted: #f1f5f9;
+  --theme-text-primary: #0f172a;
+  --theme-text-secondary: #64748b;
+  --theme-accent: #2563eb;
+  --theme-border: #e2e8f0;
 }
 
-/* Pixel-perfect rendering */
-* {
-  image-rendering: pixelated;
-}
-
-/* Smooth scrolling with reduced motion support */
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
+/* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -94,133 +85,26 @@ html {
 body {
   background-color: var(--theme-bg-primary);
   color: var(--theme-text-primary);
-}
-
-/* Pixel border utility */
-.pixel-border {
-  box-shadow:
-    inset -4px -4px 0px 0px var(--theme-pixel-shadow),
-    inset 4px 4px 0px 0px rgba(255, 255, 255, 0.15),
-    0px 0px 0px 4px var(--theme-border);
-}
-
-.pixel-border-accent {
-  box-shadow:
-    inset -4px -4px 0px 0px rgba(0,0,0,0.3),
-    inset 4px 4px 0px 0px rgba(255, 255, 255, 0.2),
-    0px 0px 0px 4px var(--theme-accent);
-}
-
-/* Pixel button press effect */
-.pixel-btn {
-  box-shadow:
-    inset -4px -4px 0px 0px rgba(0,0,0,0.4),
-    inset 4px 4px 0px 0px rgba(255,255,255,0.2);
-  transition: transform 0.05s, box-shadow 0.05s;
-}
-.pixel-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow:
-    inset 4px 4px 0px 0px rgba(0,0,0,0.4),
-    inset -2px -2px 0px 0px rgba(255,255,255,0.1);
-}
-
-/* Blinking cursor animation */
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-.cursor-blink::after {
-  content: "_";
-  animation: blink 1s step-end infinite;
-}
-
-/* Floating animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Scanline overlay */
-.scanlines::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
-}
-
-/* Glowing text on hover */
-.glow-hover:hover {
-  text-shadow: 0 0 8px var(--theme-accent), 0 0 16px var(--theme-accent);
-}
-
-/* Pixel art shake on hover */
-@keyframes pixel-shake {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-2px, 1px); }
-  50% { transform: translate(1px, -1px); }
-  75% { transform: translate(-1px, -1px); }
-}
-.pixel-shake:hover {
-  animation: pixel-shake 0.3s ease-in-out;
-}
-
-/* XP counter animation */
-@keyframes xp-pop {
-  0% { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-20px) scale(1.2); opacity: 0; }
-}
-.xp-pop {
-  animation: xp-pop 0.8s ease-out forwards;
-}
-
-/* Pulse glow for interactive elements */
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 4px var(--theme-accent); }
-  50% { box-shadow: 0 0 16px var(--theme-accent), 0 0 24px var(--theme-accent); }
-}
-.pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Typewriter cursor */
-@keyframes typewriter-cursor {
-  0%, 100% { border-right-color: var(--theme-accent); }
-  50% { border-right-color: transparent; }
-}
-.typewriter-cursor {
-  border-right: 3px solid var(--theme-accent);
-  animation: typewriter-cursor 0.8s step-end infinite;
-}
-
-/* Custom scrollbar - game themed */
-::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: var(--theme-bg-primary);
-  border-left: 2px solid var(--theme-border);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--theme-border);
-  border: 2px solid var(--theme-bg-primary);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--theme-accent);
+  font-family: "Inter", "Geist", system-ui, sans-serif;
 }
 
 /* Selection color */
 ::selection {
   background: var(--theme-accent);
-  color: var(--theme-text-dark);
+  color: #ffffff;
+}
+
+/* Custom scrollbar - professional */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--theme-bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--theme-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-accent);
 }

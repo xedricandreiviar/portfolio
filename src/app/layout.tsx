@@ -1,51 +1,42 @@
 import type { Metadata } from "next";
-import { Press_Start_2P, VT323 } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./globals.css";
 
-const pressStart = Press_Start_2P({
-  weight: "400",
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-press-start",
-  display: "swap",
-});
-
-const vt323 = VT323({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-vt323",
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Code with Xed — Xedric Andrei Viar | Full-Stack Developer Portfolio",
+  title: "Xedric Andrei Viar | Full-Stack Developer",
   description:
-    "Code with Xed — the developer portfolio of Xedric Andrei Viar, a full-stack web developer from the Philippines. Building offline-first PWAs, full-stack ordering platforms, and more. View projects, skills, and experience.",
+    "Full-stack web developer from the Philippines building production apps like Xiron and Coffee Chapters.",
   keywords: [
-    "code with xed",
     "xedric andrei viar",
     "full-stack developer philippines",
     "web developer portfolio",
-    "code with xed portfolio",
     "filipino developer",
     "nextjs portfolio",
   ],
   authors: [{ name: "Xedric Andrei Viar" }],
   creator: "Xedric Andrei Viar",
   openGraph: {
-    title: "Code with Xed — Xedric Andrei Viar | Full-Stack Developer",
+    title: "Xedric Andrei Viar | Full-Stack Developer",
     description:
-      "Full-stack web developer from the Philippines. Building PWAs, ordering platforms, and leveling up every day.",
+      "Full-stack web developer from the Philippines building production apps like Xiron and Coffee Chapters.",
     url: "https://codewithxed.vercel.app",
-    siteName: "Code with Xed",
+    images: ["/images/profile.png"],
+    siteName: "Xedric Andrei Viar",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Code with Xed — Xedric Andrei Viar",
+    title: "Xedric Andrei Viar | Full-Stack Developer",
     description:
-      "Full-stack developer portfolio. Projects, experience, and community involvement.",
+      "Full-stack web developer from the Philippines building production apps like Xiron and Coffee Chapters.",
   },
   robots: {
     index: true,
@@ -63,6 +54,14 @@ const themeScript = `
   })();
 `;
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Xedric Andrei Viar",
+  jobTitle: "Full-Stack Web Developer",
+  url: "https://codewithxed.vercel.app",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -71,13 +70,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${pressStart.variable} ${vt323.variable} antialiased`}
+      className={`${inter.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
-      <body className="relative min-h-screen overflow-x-hidden bg-bg-primary font-body text-text-primary scanlines">
+      <body className="relative min-h-screen overflow-x-hidden bg-bg-primary font-body text-text-primary">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-accent focus:px-4 focus:py-2 focus:text-text-dark focus:outline-none"

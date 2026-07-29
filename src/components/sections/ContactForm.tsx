@@ -270,13 +270,9 @@ export function ContactForm() {
           type="submit"
         />
         {status === "sending" && (
-          <motion.span
-            className="font-body text-lg text-accent"
-            animate={{ opacity: [1, 0.3, 1] }}
-            transition={{ duration: 0.8, repeat: Infinity }}
-          >
-            channeling magic...
-          </motion.span>
+          <span className="text-base text-accent">
+            Sending...
+          </span>
         )}
       </div>
     </form>

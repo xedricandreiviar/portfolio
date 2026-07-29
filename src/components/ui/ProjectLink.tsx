@@ -14,19 +14,12 @@ export function ProjectLink({ link }: ProjectLinkProps) {
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="pixel-btn inline-flex items-center gap-2 bg-bg-social px-3 py-2 font-body text-lg text-accent transition-colors hover:bg-accent hover:text-text-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      whileHover={{ scale: 1.05, y: -2 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+      className="inline-flex items-center gap-2 rounded-md px-3 py-2 font-body text-base text-accent transition-colors duration-200 hover:bg-accent/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      whileHover={{ scale: 1.02, y: -1 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.15 }}
     >
-      {link.icon === "arrow" && (
-        <motion.span
-          animate={{ x: [0, 3, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          🔗
-        </motion.span>
-      )}
+      {link.icon === "arrow" && <span>🔗</span>}
       {link.icon === "github" && <GithubIcon className="size-4" />}
       <span>{link.label}</span>
     </motion.a>

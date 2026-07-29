@@ -3,49 +3,56 @@ export interface NavLink {
   href: string;
 }
 
-export interface ProjectInfo {
-  label: string;
-  value: string;
-}
-
 export interface ProjectLink {
   label: string;
   href: string;
   icon?: "arrow" | "github";
+  external?: boolean;
 }
 
 export interface Project {
   title: string;
   description: string;
   image: string;
-  tag?: string;
-  status?: "complete" | "in-progress";
-  info: ProjectInfo[];
+  techStack: string[];
+  status: "complete" | "in-progress";
   links: ProjectLink[];
 }
 
-export interface ExperienceEntry {
-  title: string;
-  company: string;
-  dateRange: string;
-  type: "full-time" | "part-time" | "freelance" | "internship";
-  description: string;
-  achievements: string[];
-  tools: string[];
-  image?: string;
+export interface FlagshipProject extends Project {
+  problemStatement: string;
+  technicalChallenge: string;
+  technicalHighlights: string[];
+}
+
+export interface SkillEntry {
+  name: string;
+  projects: string[];
+}
+
+export interface SkillCategory {
+  category: string;
+  skills: SkillEntry[];
+}
+
+export interface ContactLink {
+  platform: "github" | "linkedin" | "email";
+  href: string;
+  label: string;
 }
 
 export interface SocialLink {
-  platform: "linkedin" | "github" | "twitter" | "instagram";
+  platform: string;
   href: string;
 }
 
-export interface EventEntry {
-  title: string;
-  organizer: string;
-  date: string;
-  description: string;
-  type: "workshop" | "hackathon" | "conference" | "meetup" | "bootcamp";
-  learned: string[];
-  image?: string;
+export interface SiteConfig {
+  name: string;
+  email: string;
+  roleDescriptor: string;
+  valueProposition: string;
+  aboutBio: string;
+  education: string;
+  location: string;
+  copyright: string;
 }

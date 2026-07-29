@@ -41,18 +41,17 @@ export function SocialIconButton({
       rel="noopener noreferrer"
       aria-label={`Visit ${icon} profile`}
       className={cn(
-        "pixel-btn flex items-center justify-center bg-bg-social transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+        "flex items-center justify-center rounded-md bg-bg-card transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
         size === "md" && "size-12",
         size === "sm" && "size-8",
         className
       )}
       whileHover={{
-        scale: 1.15,
-        rotate: [0, -5, 5, 0],
+        scale: 1.05,
         backgroundColor: color,
       }}
-      whileTap={{ scale: 0.9 }}
-      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ duration: 0.15 }}
     >
       <Icon
         className={cn(

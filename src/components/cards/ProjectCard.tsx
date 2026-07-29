@@ -5,118 +5,89 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Project } from "@/types";
 import { ProjectLink } from "@/components/ui/ProjectLink";
-import { ImageLightbox } from "@/components/ui/ImageLightbox";
 
 export interface ProjectCardProps {
   project: Project;
 }
 
-const DESCRIPTION_PREVIEW_LENGTH = 120;
-
 export function ProjectCard({ project }: ProjectCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const isLongDescription = project.description.length > DESCRIPTION_PREVIEW_LENGTH;
-
-  const displayedDescription = isExpanded || !isLongDescription
-    ? project.description
-    : project.description.slice(0, DESCRIPTION_PREVIEW_LENGTH).trimEnd() + "\u2026";
+  const [imageError, setImageError] = useState(false);
 
   return (
-    <>
-      <motion.article
-        className="pixel-border flex flex-col gap-0 overflow-hidden bg-bg-card lg:flex-row"
-        whileHover={{ scale: 1.01 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      >
-        {/* Project image - clickable */}
-        <button
-          type="button"
-          onClick={() => setIsLightboxOpen(true)}
-          className="relative block aspect-video w-full shrink-0 overflow-hidden border-b-4 border-border bg-bg-primary lg:aspect-square lg:w-[400px] lg:border-b-0 lg:border-r-4 cursor-pointer group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          aria-label={`View full screenshot of ${project.title}`}
-        >
+    <motion.article
+      className="flex flex-col overflow-hidden rounded-lg border border-border bg-bg-card"
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.15 }}
+    >
+      {/* Project image */}
+      <div className="relative aspect-video w-full overflow-hidden bg-bg-muted">
+        {!imageError && project.image ? (
           <Image
             src={project.image}
             alt={`Screenshot of ${project.title}`}
             fill
-            className="object-contain p-6 transition-transform group-hover:scale-105"
-            sizes="(max-width: 1024px) 100vw, 400px"
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+            onError={() => setImageError(true)}
             unoptimized={project.image.endsWith(".svg")}
           />
-          {project.tag && (
-            <div className="absolute left-2 top-2 bg-accent px-2 py-1 font-display text-[7px] text-text-dark">
-              {project.tag.toUpperCase()}
-            </div>
-          )}
-          {/* Hover hint */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30">
-            <span className="font-display text-[8px] text-white opacity-0 transition-opacity group-hover:opacity-100">
-              🔍 CLICK TO INSPECT
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-bg-muted">
+            <span className="font-body text-base text-text-secondary">
+              {project.title}
             </span>
           </div>
-        </button>
+        )}
+      </div>
 
-        {/* Project content - quest description */}
-        <div className="flex flex-1 flex-col gap-4 p-4 lg:p-6">
-          {/* Title */}
-          <div>
-            <p className="font-display text-[8px] text-accent mb-1">
-              {project.status === "in-progress" ? "\u2694\uFE0F QUEST IN PROGRESS" : "\uD83D\uDCDC QUEST COMPLETE"}
-            </p>
-            <h3 className="font-display text-[10px] leading-relaxed text-text-primary lg:text-xs">
-              {project.title}
-            </h3>
-          </div>
+      {/* Project content */}
+      <div className="flex flex-1 flex-col gap-3 p-4 lg:p-6">
+        {/* Title and status */}
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="font-display text-lg font-semibold leading-snug text-text-primary">
+            {project.title}
+          </h3>
+          {project.status === "in-progress" && (
+            <span className="shrink-0 rounded-full bg-accent/10 px-2.5 py-1 text-base font-medium text-accent md:text-sm md:py-0.5">
+              In Progress
+            </span>
+          )}
+        </div>
 
-          {/* Description */}
-          <div>
-            <p className="font-body text-lg leading-relaxed text-text-secondary lg:text-xl">
-              {displayedDescription}
-            </p>
-            {isLongDescription && (
-              <button
-                onClick={() => setIsExpanded((prev) => !prev)}
-                className="mt-2 font-body text-base text-accent opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                aria-expanded={isExpanded}
-              >
-                {isExpanded ? "Show less" : "See full description"}
-              </button>
-            )}
-          </div>
+        {/* Description */}
+        <p className="font-body text-base leading-relaxed text-text-secondary">
+          {project.description}
+        </p>
 
-          {/* Project info - game stats style */}
-          <div className="border-t-2 border-b-2 border-border py-3">
-            <p className="mb-2 font-display text-[7px] text-accent">QUEST DETAILS</p>
-            <dl className="flex flex-col gap-1">
-              {project.info.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center justify-between font-body text-lg"
-                >
-                  <dt className="text-text-secondary">{item.label}:</dt>
-                  <dd className="text-accent">{item.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+        {/* Tech stack */}
+        <div className="flex flex-wrap gap-1.5">
+          {project.techStack.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-md bg-bg-muted px-2 py-0.5 font-body text-base text-text-secondary md:text-sm"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
 
-          {/* Links */}
-          <div className="flex flex-wrap gap-3">
+        {/* Links */}
+        {project.links.length > 0 && (
+          <div className="mt-auto flex flex-wrap gap-2 pt-3 border-t border-border">
             {project.links.map((link) => (
-              <ProjectLink key={link.label} link={link} />
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 rounded-md px-4 py-2 text-base font-medium text-accent transition-colors hover:bg-accent/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                {link.label}
+              </a>
             ))}
           </div>
-        </div>
-      </motion.article>
-
-      {/* Lightbox */}
-      <ImageLightbox
-        src={project.image}
-        alt={`Screenshot of ${project.title}`}
-        isOpen={isLightboxOpen}
-        onClose={() => setIsLightboxOpen(false)}
-      />
-    </>
+        )}
+      </div>
+    </motion.article>
   );
 }
