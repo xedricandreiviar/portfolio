@@ -12,7 +12,8 @@ export function ContactLinks({ links, resumePath }: ContactLinksProps) {
         Get in Touch
       </h2>
       <p className="mt-4 text-base text-text-secondary md:text-lg">
-        Interested in working together? Reach out through any of these channels.
+        Currently open to internships, apprenticeships, and part-time roles in web development.
+        If you have a project that needs shipping or a team that needs an extra builder, let&apos;s talk.
       </p>
       <ul className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap sm:gap-6">
         {links.map((link) => {
@@ -37,11 +38,10 @@ export function ContactLinks({ links, resumePath }: ContactLinksProps) {
         <div className="mt-8">
           <a
             href={resumePath}
-            target="_blank"
-            rel="noopener noreferrer"
+            download
             className="inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-lg bg-accent px-5 py-3 text-base font-medium text-white transition-colors hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
-            Download Resume
+            📄 Download Resume
           </a>
         </div>
       )}
