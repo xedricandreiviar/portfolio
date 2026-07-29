@@ -51,18 +51,22 @@ export const PROJECTS: Project[] = [
   {
     title: "Gym Management SaaS",
     description: "Multi-tenant gym management platform with member tracking, payment processing, and trainer scheduling.",
-    image: "/images/project-3.svg",
+    image: "/images/project-3.png",
     techStack: ["NestJS", "Next.js", "TypeORM", "PostgreSQL", "Turborepo"],
     status: "in-progress",
-    links: [],
+    links: [
+      { label: "Live Demo", href: "https://xedgymmanagement.vercel.app/", icon: "arrow", external: true },
+    ],
   },
   {
     title: "Daily Money Tracker",
     description: "Personal finance tracking application for daily expense logging and budget visualization.",
-    image: "/images/project-2.svg",
+    image: "/images/project-4.png",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
     status: "in-progress",
-    links: [],
+    links: [
+      { label: "Live Demo", href: "https://xedmoneytracker.vercel.app/", icon: "arrow", external: true },
+    ],
   },
 ];
 
