@@ -23,7 +23,7 @@ export default function HomePage() {
           <Skills />
         </section>
         <section id="contact">
-          <ContactLinks links={CONTACT_LINKS} resumePath="/resume.pdf" />
+          <ContactLinks links={CONTACT_LINKS} resumePath="/Xedric_Viar_Resume.pdf" />
         </section>
       </main>
       <Footer />
