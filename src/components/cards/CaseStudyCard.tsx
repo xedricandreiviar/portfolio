@@ -50,7 +50,7 @@ export function CaseStudyCard({ project }: CaseStudyCardProps) {
   const demoLink = project.links.find((link) => link.icon === "arrow" || link.label.toLowerCase().includes("demo"));
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-lg border border-border bg-bg-card shadow-sm">
+    <article className="flex flex-col overflow-hidden rounded-lg border border-border bg-bg-card shadow-sm transition-all duration-250 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:border-accent motion-reduce:transition-none motion-reduce:transform-none motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-sm">
       {/* Project image - 16:9 on mobile, reserved space to prevent layout shift */}
       <div className="relative aspect-video w-full shrink-0 overflow-hidden bg-bg-muted">
         {!imageError ? (

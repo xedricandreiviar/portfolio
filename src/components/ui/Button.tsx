@@ -21,7 +21,8 @@ export function Button({
   className,
 }: ButtonProps) {
   const baseClasses = cn(
-    "pixel-btn inline-flex items-center justify-center font-display text-[10px] uppercase tracking-wide transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+    "pixel-btn inline-flex items-center justify-center font-display text-[10px] uppercase tracking-wide transition-all duration-250 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+    "hover:shadow-[0_0_12px_2px_var(--theme-accent)] motion-reduce:hover:shadow-none motion-reduce:transition-none",
     variant === "primary" && "bg-accent px-6 py-3 text-text-dark hover:brightness-110",
     variant === "submit" && "bg-xp-green px-6 py-3 text-text-dark hover:brightness-110",
     className

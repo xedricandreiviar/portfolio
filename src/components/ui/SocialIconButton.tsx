@@ -41,7 +41,7 @@ export function SocialIconButton({
       rel="noopener noreferrer"
       aria-label={`Visit ${icon} profile`}
       className={cn(
-        "flex items-center justify-center rounded-md bg-bg-card transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+        "flex items-center justify-center rounded-md bg-bg-card transition-all duration-[250ms] ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent hover:shadow-[0_0_10px_0px_color-mix(in_srgb,var(--theme-accent)_30%,transparent)] motion-reduce:hover:shadow-none motion-reduce:transition-none",
         size === "md" && "size-12",
         size === "sm" && "size-8",
         className

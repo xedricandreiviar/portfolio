@@ -84,8 +84,91 @@ html {
 
 body {
   background-color: var(--theme-bg-primary);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--theme-border) 40%, transparent) 0.75px,
+    transparent 0.75px
+  );
+  background-size: 24px 24px;
   color: var(--theme-text-primary);
   font-family: "Inter", "Geist", system-ui, sans-serif;
+}
+
+/* Keyframe Animations */
+
+/* Profile image floating animation - 4px amplitude, 3s cycle, ease-in-out */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Floating icon drift variants - continuous translate movement */
+@keyframes drift-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10px, -8px);
+  }
+  50% {
+    transform: translate(5px, -15px);
+  }
+  75% {
+    transform: translate(-5px, -8px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes drift-2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-8px, -5px);
+  }
+  50% {
+    transform: translate(-12px, 5px);
+  }
+  75% {
+    transform: translate(-4px, 10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes drift-3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(6px, 10px);
+  }
+  50% {
+    transform: translate(12px, 4px);
+  }
+  75% {
+    transform: translate(8px, -6px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Glow utility classes */
+.glow-button {
+  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--theme-accent) 40%, transparent);
+}
+
+.glow-social {
+  box-shadow: 0 0 10px 0px color-mix(in srgb, var(--theme-accent) 30%, transparent);
 }
 
 /* Selection color */

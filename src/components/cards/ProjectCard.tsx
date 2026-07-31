@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import type { Project } from "@/types";
 import { ProjectLink } from "@/components/ui/ProjectLink";
 
@@ -14,10 +13,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <motion.article
-      className="flex flex-col overflow-hidden rounded-lg border border-border bg-bg-card"
-      whileHover={{ y: -2 }}
-      transition={{ duration: 0.15 }}
+    <article
+      className="flex flex-col overflow-hidden rounded-lg border border-border bg-bg-card transition-all duration-250 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:border-accent motion-reduce:transition-none motion-reduce:transform-none motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-none"
     >
       {/* Project image */}
       <div className="relative aspect-video w-full overflow-hidden bg-bg-muted">
@@ -88,6 +85,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
       </div>
-    </motion.article>
+    </article>
   );
 }
